@@ -13,4 +13,3 @@ def retorna_matriculas_decrescente(alist):
 			break
 	
 	return alist
-	
