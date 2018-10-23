@@ -1,3 +1,7 @@
+#coding: utf-8
+
+import sys
+
 # Esse metodo recebe uma lista com as matriculas dos alunos
 # e retorna essa lista em ordem crescente de matriculas
 def retorna_matriculas_decrescente(alist):
@@ -55,7 +59,7 @@ def retorna_minimo_moedasBT(tipos_moedas, valor, possible_solution):
 				if(tamanho_solution == -1):
 					tamanho_solution = tamanho
 				else:
-					if(tamanho_solution > tamanho):
+					if(tamanho_solution >= tamanho):
 						tamanho_solution = tamanho
 			possible_solution.pop()
 	return tamanho_solution
@@ -76,6 +80,6 @@ def its_promissing(possible_solution, valor):
 	return sum <= valor
 
 
+print(retorna_minimo_moedas(200, [50,100,150]))
 
 
-	
