@@ -1,5 +1,5 @@
 #coding: utf-8
-
+#Estrategia Gulosa - Aluno: Pedro Guedes Braga
 import sys
 
 # Esse metodo recebe uma lista com as matriculas dos alunos
@@ -18,11 +18,25 @@ def retorna_matriculas_decrescente(alist):
 # Assuma que existe uma quantidade infinita de cada tipo de moeda
 def retorna_minimo_moedas(valor, tipos_moedas):
 	print valor, tipos_moedas
-	resultado = retorna_minimo_moedas_FB(tipos_moedas, valor)
-	if resultado == sys.maxint:
-		return -1
+	return troco_greedy_strategy(valor, tipos_moedas)
+
+
+# Abordagem gulosa para o problema do troco
+def troco_greedy_strategy(valor, tipos_moedas):
+	tipos_moedas.sort()
+	tipos_moedas.reverse() # decrescente
+	troco = []
+	i = 0
+	while(sum(troco) < valor and i < len(tipos_moedas)):
+		if(tipos_moedas[i] + sum(troco) <= valor):
+			troco.append(tipos_moedas[i])
+		if(tipos_moedas[i] + sum(troco) > valor):
+			i = i + 1
+	if(sum(troco) == valor):
+		return len(troco)
 	else:
-		return resultado
+		return -1
+	
 
 def retorna_minimo_moedas_FB(tipos_moedas, valor):
 	if valor == 0:
@@ -36,5 +50,4 @@ def retorna_minimo_moedas_FB(tipos_moedas, valor):
 			resultado = min(resultado, retorna_minimo_moedas_FB(tipos_moedas, valor - moeda) + 1) 
 		
 	return resultado	 
-
 
