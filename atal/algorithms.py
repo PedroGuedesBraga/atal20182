@@ -1,6 +1,6 @@
 #coding: utf-8
 
-#Aluno: Pedro Guedes Braga - 115210544
+#Aluno: Pedro Guedes Braga - 115210544 - Mochila Binaria usando PD
 
 import sys
 
