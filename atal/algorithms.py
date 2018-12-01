@@ -1,5 +1,7 @@
 #coding: utf-8
 
+#Aluno: Pedro Guedes Braga - 115210544
+
 import sys
 
 # Esse metodo recebe uma lista com as matriculas dos alunos
@@ -52,13 +54,33 @@ def retorna_minimo_moedas_FB(tipos_moedas, valor):
 # Retorna o valor maximo que cabe na mochila com 
 # capacidade peso_maximo
 def mochila_binaria(peso_maximo, pesos, valores, n): 
-  
-    if n == 0 or peso_maximo == 0 : 
-        return 0
-  
-    if (pesos[n-1] > peso_maximo): 
-        return mochila_binaria(peso_maximo, pesos, valores, n-1) 
-    else: 
-        return max(valores[n-1] + mochila_binaria(peso_maximo-pesos[n-1], pesos, valores, n-1), 
-                   mochila_binaria(peso_maximo, pesos, valores, n-1)) 
+    return dynamic_mochila_binaria(peso_maximo, pesos, valores)
+
+
+
+def dynamic_mochila_binaria(peso_maximo, pesos, valor):
+	#Inicializa as linhas da matriz com o caso base
+	matrix = []
+	#Caso base: Para o peso 0, o valor maximo que se consegue eh 0!
+	for i in range(len(pesos)):
+		matrix.append([0])
+	
+	#Caso base: Preenchimento da primeira linha da matriz
+	for j in range(1, peso_maximo + 1):
+		if(pesos[0] > j):
+			matrix[0].append(0)
+		else:
+			matrix[0].append(valor[0])
+
+	#Preenchimento do restante da matriz usando a subestrutura otima!
+	for i in range(1, len(pesos)):
+		for j in range(1, peso_maximo + 1):
+			if(pesos[i] > j):
+				matrix[i].append(matrix[i-1][j])
+			else:
+				matrix[i].append(max(valor[i] + matrix[i-1][j-pesos[i]], matrix[i-1][j]))
+
+	
+			
+	return matrix[len(pesos) - 1][peso_maximo]
 
